@@ -6,7 +6,9 @@ def main
   response = nil
 
   puts "Welcome to the Jerry's store!"
-
+  puts "Is the customer a member? (y/n)"
+  app.member
+  
   while response != 'q'
     puts 'What would you like to do?'
       puts '1. Shop'

@@ -1,11 +1,10 @@
-require_relative 'lib/inventory'
-require_relative 'lib/shopping_cart'
-require_relative 'lib/customer'
-require_relative 'lib/item'
+require_relative 'classes/inventory'
+require_relative 'classes/shopping_cart'
+require_relative 'classes/item'
 require 'date'
 
 class App
-  attr_accessor :inventory, :shopping_cart, :member, :transaction_number
+  attr_accessor :inventory, :shopping_cart, :member, :transaction_number, :cancel_transaction
 
   def initialize
     @inventory = Inventory.new
@@ -29,10 +28,11 @@ class App
    file[0].to_i
   end
 
-  def shop
-    #We ask the user if they are a member
-    puts 'Is the customer a member? (y/n)'
+  def member
     @member = gets.chomp
+  end
+
+  def shop
     #If they are not a member, we show them the regular price
 
     @inventory.items.each do |item|
@@ -99,12 +99,12 @@ class App
     puts "Your cart:"
     puts "Item #{' ' * 10} Quantity #{' ' * 10} Unit price #{' ' * 10} Total price"
     @shopping_cart.each do |item|
-      puts "#{item.name} #{' ' * 10} #{item.quantity} #{' ' * 20} $#{item.unit_price} #{' ' * 15} $#{item.quantity * item.unit_price}"
+      puts "#{item.name} #{' ' * 10} #{item.quantity} #{' ' * 20} $#{format('%.2f', item.unit_price)} #{' ' * 15} $#{format('%.2f', item.quantity * item.unit_price)}"
     end
-    puts "TOTAL NUMBER OF ITEMS: #{total_items}"
-    puts "SUB-TOTAL: $#{sub_total}"
-    puts "TAX (6.5%): $#{tax}"
-    puts "TOTAL: $#{total}"
+    puts "TOTAL NUMBER OF ITEMS: #{format('%.2f', total_items)}"
+    puts "SUB-TOTAL: $#{format('%.2f', sub_total)}"
+    puts "TAX (6.5%): $#{format('%.2f', tax)}"
+    puts "TOTAL: $#{format('%.2f', total)}"
   end
 
   def total_items
@@ -147,17 +147,17 @@ class App
     recipe.puts "TRANSACTION: #{format('%06d', @transaction_number)}"
     recipe.puts "ITEM #{' ' * 10} QUANTITY #{' ' * 10} UNIT PRICE #{' ' * 10} TOTAL"
     @shopping_cart.each do |item|
-      recipe.puts "#{item.name} #{' ' * 10} #{item.quantity} #{' ' * 20} $#{item.unit_price} #{' ' * 15} $#{item.quantity * item.unit_price}"
+      recipe.puts "#{item.name} #{' ' * 10} #{item.quantity} #{' ' * 20} $#{format('%.2f', item.unit_price)} #{' ' * 15} $#{format('%.2f', item.quantity * item.unit_price)}"
     end
     recipe.puts "#{'*' * 50}"
     recipe.puts "TOTAL NUMBER OF ITEMS: #{total_items}"
-    recipe.puts "SUB-TOTAL: $#{sub_total}"
-    recipe.puts "TAX (6.5%): $#{tax}"
-    recipe.puts "TOTAL: $#{total}"
-    recipe.puts "CASH: $#{cash}"
-    recipe.puts "CHANGE: $#{cash - total}"
+    recipe.puts "SUB-TOTAL: $#{format('%.2f',sub_total)}"
+    recipe.puts "TAX (6.5%): $#{format('%.2f', tax)}"
+    recipe.puts "TOTAL: $#{format('%.2f',total)}"
+    recipe.puts "CASH: $#{format('%.2f',cash)}"
+    recipe.puts "CHANGE: $#{format('%.2f', cash - total)}"
     recipe.puts "#{'*' * 50}"
-    recipe.puts "YOU SAVED $#{discount_amount}!" if @member == 'y'
+    recipe.puts "YOU SAVED $#{format('%.2f', discount_amount)}!" if @member == 'y'
     update_inventory
     @shopping_cart = []
     update_transaction_number
@@ -193,6 +193,10 @@ class App
     File.open('./data/transaction_number.txt', 'w') do |file|
       file.puts @transaction_number
     end
+  end
+
+  def cancel_transaction
+    @shopping_cart = []
   end
 
 
