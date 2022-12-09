@@ -88,6 +88,28 @@ describe App do
     end
   end
 
-  
+  context 'when testing the checkout and cancel transation' do
+    before :each do
+      @app = App.new
+      @app.member = 'y'
+      istance1 = 'Milk: 5, $3.75, $3.50, Tax-Exempt'
+      @item1 = Item.new(istance1)
+      @cart = Shopping_cart.new(@item1, 2, 3.50)
+      @app.shopping_cart << @cart
+    end
+
+    # it 'when select checkout should update the inventory' do
+    #   allow(@app).to receive(:gets).and_return("10")
+    #   @app.checkout
+    #   expect(@app.inventory.items[0].quantity).to eq @Milk.quantity - 2
+    # end
+
+    it 'when select cancel transaction should return the shopping cart empty' do
+      allow(@app).to receive(:gets).and_return("5")
+      @app.cancel_transaction
+      expect(@app.shopping_cart.length).to eq 0
+    end
+    
+  end
     
 end
