@@ -77,6 +77,12 @@ class App
   end
 
   def remove_item_from_cart 
+
+    if @shopping_cart.empty?
+      puts 'Your cart is empty'
+      return
+    end
+
     puts 'Select an option:'
     puts '1. Remove item from cart'
     puts '2. Remove all items from cart'
@@ -213,6 +219,12 @@ class App
   end
 
   def cancel_transaction
+
+    if @shopping_cart.empty?
+      puts 'Your cart is empty'
+      return
+    end
+    
     @shopping_cart = []
     p 'Transaction cancelled'
   end
