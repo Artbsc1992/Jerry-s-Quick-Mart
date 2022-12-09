@@ -42,8 +42,18 @@ class App
 
     index = gets.chomp.to_i
 
+    if @inventory.items[index - 1].nil?
+      puts "Invalid item"
+      shop
+    end
+
     puts "How many items would you like to pick?"
     item_qty = gets.chomp.to_i
+
+    if @inventory.items[index - 1].quantity.to_i < item_qty
+      puts "Not enough items in stock"
+      shop
+    end
 
     item = @inventory.items[index - 1]
     if !item.nil?
