@@ -74,12 +74,12 @@ class App
     response = gets.chomp
     case response.to_i
     when 1
-      puts 'Select an item by ID'
-      @shopping_cart.each do |item|
-        puts "ID: #{item.id}, #{item.name}"
+      puts 'Select an item'
+      @shopping_cart.each_with_index do |item, index|
+        puts "#{index + 1}. #{item.name}"
       end
-      item_id = gets.chomp.to_i
-      @shopping_cart.delete_if {|item| item.id.to_i == item_id}
+      index = gets.chomp.to_i
+      @shopping_cart.delete_at(index - 1)
       puts 'Item removed from cart'
       
     when 2
