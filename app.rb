@@ -4,7 +4,7 @@ require_relative 'classes/item'
 require 'date'
 
 class App
-  attr_accessor :inventory, :shopping_cart, :member, :transaction_number, :cancel_transaction
+  attr_accessor :inventory, :shopping_cart, :member, :transaction_number
 
   def initialize
     @inventory = Inventory.new
