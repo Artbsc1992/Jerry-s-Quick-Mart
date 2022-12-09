@@ -24,10 +24,11 @@ After you're finished please remove all the comments and instructions!
 
 <div align="center">
   <!-- You are encouraged to replace this logo with your own! Otherwise you can also remove it. -->
-  <img src="murple_logo.png" alt="logo" width="140"  height="auto" />
+  <img src="murple_logo.jpeg
+  " alt="logo" width="200"  height="auto" />
   <br/>
 
-  <h3><b>Microverse README Template</b></h3>
+  <h3><b>Documentation</b></h3>
 
 </div>
 
@@ -57,36 +58,21 @@ After you're finished please remove all the comments and instructions!
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [your_project_name] <a name="about-project"></a>
+# 📖 [Jerry's Quick Mart] <a name="about-project"></a>
 
-> Describe your project in 1 or 2 sentences.
+> In this project, I have built a solution for Jerry's market. He needed checkout software 3 days before his grand opening, so I developed an app based on OOP to receive an inventory from a .txt file and print a receipt to a new .txt with a transaction number.
 
-**[your_project__name]** is a...
 
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
 
-> Describe the tech stack and include only the relevant sections that apply to your project.
+> I use Ruby for the whole implementation because It's the best option for an OOP-based app. And for the testing suit, I've used RSpec.
 
 <details>
   <summary>Client</summary>
   <ul>
-    <li><a href="https://reactjs.org/">React.js</a></li>
-  </ul>
-</details>
-
-<details>
-  <summary>Server</summary>
-  <ul>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>Database</summary>
-  <ul>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+    <li><a href="https://www.ruby-lang.org">Ruby</a></li>
   </ul>
 </details>
 
@@ -94,21 +80,11 @@ After you're finished please remove all the comments and instructions!
 
 ### Key Features <a name="key-features"></a>
 
-> Describe between 1-3 key features of the application.
+> The main features of the app are:
 
-- **[key_feature_1]**
-- **[key_feature_2]**
-- **[key_feature_3]**
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LIVE DEMO -->
-
-## 🚀 Live Demo <a name="live-demo"></a>
-
-> Add a link to your deployed project.
-
-- [Live Demo Link](https://yourdeployedapplicationlink.com)
+- **Shop items and add them to the cart**
+- **Show a cart preview**
+- **Checkout and printing receipt**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -116,13 +92,14 @@ After you're finished please remove all the comments and instructions!
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
-> Describe how a new developer could make use of your project.
+> Follow this steps to start the application.
 
 To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
-In order to run this project you need:
+In order to run this project you need Ruby installed on your computer.
+
 
 <!--
 Example command:
@@ -136,39 +113,27 @@ Example command:
 
 Clone this repository to your desired folder:
 
-<!--
-Example commands:
+1. Clone the repository
 
-```sh
-  cd my-folder
-  git clone git@github.com:myaccount/my-project.git
+2. Open the terminal
+
+3. Run this command:
+```bash
+  git clone https://github.com/Artbsc1992/Jerry-s-Quick-Mart.git
 ```
---->
 
-### Install
-
-Install this project with:
-
-<!--
-Example command:
-
-```sh
-  cd my-project
-  gem install
+4. Enter in to the folder:
+```bash
+  cd Jerry-s-Quick-Mart
 ```
---->
 
 ### Usage
 
 To run the project, execute the following command:
 
-<!--
-Example command:
-
 ```sh
-  rails server
+  ruby main.rb
 ```
---->
 
 ### Run tests
 
