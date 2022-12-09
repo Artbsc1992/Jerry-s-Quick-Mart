@@ -44,22 +44,18 @@ class App
 
     if @inventory.items[index - 1].nil?
       puts "Invalid item"
-      shop
+      return
     end
 
     puts "How many items would you like to pick?"
     item_qty = gets.chomp.to_i
 
-    if @inventory.items[index - 1].quantity.to_i < item_qty
-      puts "Not enough items in stock"
-      shop
-    end
-
     item = @inventory.items[index - 1]
     if !item.nil?
       if item.quantity.to_i < item_qty
         puts "Not enough items in stock"
-        shop
+        item_qty = ''
+        return
       end
     else
       puts "Invalid item"
@@ -224,7 +220,7 @@ class App
       puts 'Your cart is empty'
       return
     end
-    
+
     @shopping_cart = []
     p 'Transaction cancelled'
   end
