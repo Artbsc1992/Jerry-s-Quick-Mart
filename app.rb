@@ -14,6 +14,8 @@ class App
     @transaction_number = transaction_number
   end
 
+  private
+
   def upload_inventory
     # puts 'Write your inventory txt file name'
     file_name = './data/inventory.txt'
