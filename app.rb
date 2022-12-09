@@ -74,7 +74,6 @@ class App
     response = gets.chomp
     case response.to_i
     when 1
-      puts @shopping_cart
       puts 'Select an item by ID'
       @shopping_cart.each do |item|
         puts "ID: #{item.id}, #{item.name}"
