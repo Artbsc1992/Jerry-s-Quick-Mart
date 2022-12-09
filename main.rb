@@ -7,7 +7,7 @@ def main
 
   puts "Welcome to the Jerry's store!"
   puts "Is the customer a member? (y/n)"
-  app.member
+  app.member_status
   
   while response != 'q'
     puts 'What would you like to do?'

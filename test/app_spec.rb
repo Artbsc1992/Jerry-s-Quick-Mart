@@ -23,7 +23,7 @@ describe App do
     end
 
     it 'should return empty member status' do
-      expect(@app.member.length).equal? 0
+      expect(@app.member).to eq ''
     end
 
     it 'should return the number of transactions' do

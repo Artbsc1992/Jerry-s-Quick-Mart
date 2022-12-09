@@ -28,7 +28,7 @@ class App
    file[0].to_i
   end
 
-  def member
+  def member_status
     @member = gets.chomp
   end
 
