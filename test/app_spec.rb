@@ -36,28 +36,58 @@ describe App do
   context 'Test remove item from shopping cart and view shopping cart' do
     before :each do
       @app = App.new
+      @app.member = 'y'
       istance1 = 'Milk: 5, $3.75, $3.50, Tax-Exempt'
       @item1 = Item.new(istance1)
       @cart = Shopping_cart.new(@item1, 10, 3.50)
       @app.shopping_cart << @cart
     end
 
-    it 'should return the shopping cart with one item' do
-      expect(@app.shopping_cart.length).to eq 1
-    end
-
     it 'should return the shopping cart with no items' do
-      p @item1.id
-      allow(@app).to receive(:gets).and_return("1", "#{@item1.id.to_s}")
+      allow(@app).to receive(:gets).and_return("1", "1")
       @app.remove_item_from_cart
       expect(@app.shopping_cart.length).to eq 0 
     end
 
-    # it 'should eliminate all items in shopping cart' do
-    #   @app.remove_item_from_cart
-    #   allow(@app).to receive(:gets).and_return('y', '1', @item1.id.to_s, '1', 'y', '1', @item1.id.to_s, '1', 'n')
-    #   expect(@app.shopping_cart.length).equal? 0
+    it 'should eliminate all items in shopping cart' do
+      allow(@app).to receive(:gets).and_return("2")
+      @app.remove_item_from_cart
+      expect(@app.shopping_cart.length).equal? 0
+    end
+
+    # it 'should show the shopping cart' do
+    #   allow(@app).to receive(:gets).and_return("3")
+    #   expect { @app.view_cart }.to output("Your cart:\nItem #{' ' * 10} Quantity #{' ' * 10} Unit price #{' ' * 10} Total price\nMilk #{' ' * 10} 10 #{' ' * 20} $3.50 #{' ' * 15} $35.00\nTOTAL NUMBER OF ITEMS: 10.00\nSUB-TOTAL: $35.00\nTAX (6.5%): $0.00\nTOTAL: $35.00").to_stdout
     # end
   end
+
+  context 'when testing mathematical operations' do
+    before :each do
+      @app = App.new
+      @app.member = 'y'
+      istance1 = 'Milk: 5, $3.75, $3.50, Tax-Exempt'
+      @item1 = Item.new(istance1)
+      @cart = Shopping_cart.new(@item1, 10, 3.50)
+      @app.shopping_cart << @cart
+    end
+
+    it 'should return the total number of items' do
+      expect(@app.total_items).to eq 10
+    end
+
+    it 'should return the subtotal' do
+      expect(@app.sub_total).to eq 35.00
+    end
+
+    it 'should return the tax' do
+      expect(@app.tax).to eq 0.00
+    end
+
+    it 'should return the total' do
+      expect(@app.total).to eq 35.00
+    end
+  end
+
+  
     
 end
