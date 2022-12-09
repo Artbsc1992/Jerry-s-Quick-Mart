@@ -95,6 +95,10 @@ class App
   end
 
   def view_cart
+    if @shopping_cart.empty?
+      puts 'Your cart is empty'
+      return
+    end
     puts "Your cart:"
     puts "Item #{' ' * 10} Quantity #{' ' * 10} Unit price #{' ' * 10} Total price"
     @shopping_cart.each do |item|
