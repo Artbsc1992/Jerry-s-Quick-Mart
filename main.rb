@@ -12,10 +12,10 @@ def main
   while response != 'q'
     puts 'What would you like to do?'
       puts '1. Shop'
-      puts '2. remove from cart'
+      puts '2. Remove from cart'
       puts '3. View cart'
       puts '4. Checkout'
-      puts '5. cancel transaction'
+      puts '5. Cancel transaction'
       puts 'q. Quit'
       response = gets.chomp
 
