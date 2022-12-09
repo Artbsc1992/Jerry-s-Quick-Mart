@@ -35,26 +35,26 @@ class App
   def shop
     #If they are not a member, we show them the regular price
 
-    @inventory.items.each do |item|
-      puts " ID: #{item.id}, stock: #{item.quantity}, #{item.name}: $#{@member == 'y' ? item.member_price : item.regular_price}"
+    @inventory.items.each_with_index do |item, index|
+      puts "#{index + 1}. #{item.name}: stock: #{item.quantity}, $#{@member == 'y' ? item.member_price : item.regular_price}"
     end
 
-    puts "Select an item by ID"
-    item_id = gets.chomp.to_i
+    puts "Select an item"
+    index = gets.chomp.to_i
 
     puts "How many items would you like to pick?"
     item_qty = gets.chomp.to_i
 
-    item = @inventory.items.find {|item| item.id == item_id}#@inventory.items.find do |item|
+    item = @inventory.items[index - 1]
     if !item.nil?
       if item.quantity.to_i < item_qty
         puts "Not enough items in stock"
         shop
       end
     else
-      puts "Invalid ID"
+      puts "Invalid item"
     end
-    #reescribir desde preguntar si es miembro o no hasta aqui xd
+
     unit_price = @member == 'y' ? item.member_price : item.regular_price
     @shopping_cart << Shopping_cart.new(item, item_qty, unit_price)
     puts "Item added to cart"
