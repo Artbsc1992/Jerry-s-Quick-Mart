@@ -136,6 +136,10 @@ class App
   end
 
   def checkout
+    if @shopping_cart.empty?
+      puts 'Your cart is empty'
+      return
+    end
     @date = Date.today
     puts "TOTAL: $#{total}"
     puts "CASH: $"
