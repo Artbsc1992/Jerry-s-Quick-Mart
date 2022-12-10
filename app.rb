@@ -14,7 +14,6 @@ class App
     @transaction_number = transaction_number
   end
 
-  private
 
   def upload_inventory
     # puts 'Write your inventory txt file name'
@@ -101,7 +100,7 @@ class App
       puts 'All items removed from cart'
       
     when 3
-      exit
+      return
     else
       puts 'Invalid option'
     end

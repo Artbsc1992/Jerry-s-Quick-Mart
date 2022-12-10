@@ -1,29 +1,7 @@
 <a name="readme-top"></a>
 
-<!--
-HOW TO USE:
-This is an example of how you may give instructions on setting up your project locally.
-
-Modify this file to match your project and remove sections that don't apply.
-
-REQUIRED SECTIONS:
-- Table of Contents
-- About the Project
-  - Built With
-  - Live Demo
-- Getting Started
-- Authors
-- Future Features
-- Contributing
-- Show your support
-- Acknowledgements
-- License
-
-After you're finished please remove all the comments and instructions!
--->
-
 <div align="center">
-  <!-- You are encouraged to replace this logo with your own! Otherwise you can also remove it. -->
+
   <img src="murple_logo.jpeg
   " alt="logo" width="200"  height="auto" />
   <br/>
@@ -37,6 +15,8 @@ After you're finished please remove all the comments and instructions!
 # 📗 Table of Contents
 
 - [📖 About the Project](#about-project)
+  - [Problem](#problem)
+  - [Solution](#solution)  
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
@@ -46,16 +26,69 @@ After you're finished please remove all the comments and instructions!
   - [Install](#install)
   - [Usage](#usage)
   - [Run tests](#run-tests)
-- [👥 Authors](#authors)
+- [👥 Author](#authors)
 - [🤝 Contributing](#contributing)
 - [⭐️ Show your support](#support)
 - [📝 License](#license)
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [Jerry's Quick Mart] <a name="about-project"></a>
+# 📖 Jerry's Quick Mart <a name="about-project"></a>
 
 > In this project, I have built a solution for Jerry's market. He needed checkout software 3 days before his grand opening, so I developed an app based on OOP to receive an inventory from a .txt file and print a receipt to a new .txt with a transaction number.
+
+## Problem <a name= "problem"></a>
+### Jerry requires the following functionalities:
+- Select whether the customer is a Rewards Member or a Regular customer.
+- Add items to the cart.
+- Remove individual items from the cart, with the empty cart option.
+- View cart
+- Checkout and print receipt
+- Cancel transaction
+
+Inventory should be passed into the application in a text file, with the item information on each line. The receipt should be printed as a .txt file, with the transaction number and date included in the file name. The inventory should be updated after checkout.
+
+## Solution <a name="solution"></a>
+
+I have created a plain CLI app so Jerry's employees can interact with the inventory previously loaded with the inventory.txt file.
+
+One of the first things that de app will ask is wheter the customer status is member or not, giving a quick solution for the first problematic.
+
+After that the employee can choose between 6 options that are:
+
+- Shop
+- Remove from cart
+- View cart
+- checkout
+- Cancel transaction
+- Quit
+
+### Shop:
+- In this section we can select an Item from the showed list using their index.
+- After that the app will asked how many items we need.
+- Finally our item with it's desired quantity will be added to the cart.
+- This section ends asking if we need to add a new Item or not.
+
+### Remove from cart:
+- Here my app show 3 options:
+  - Remove item from cart: Here we select the item we desire to elimited individualy.
+  - Remove all items from cart: Here we just erase all items added to cart.
+  - Go back to main manu: in case you change your mind.
+
+### View cart:
+- Here we print in our terminal a preview of our cart showing us the name of the item with it's selected quantity, unit price and total price.
+- We also can preview in detail what is the final amount that the customer needs to pay, showing subtotal, tax `(if it's taxable)` and the sum of those two as Total.
+
+### Checkout:
+- First the app will ask for the amount of money that the customer will use to pay.
+  - if it's not enough the app will print `not enough cash` and it'l ask again.
+- If we input the correct amount of cash the app will print us a receipt with the same information that the cart showed us but also with the amount of money that our members saved!, all of this appear in a new file named after it's number of transaction and date.
+
+Optional future implementation options:
+- We can use `Thor` for our CLI for a better user experience.
+- we can edit our cart by decreasing or increasing the quantity of items.
+
+
 
 
 ## 🛠 Built With <a name="built-with"></a>
@@ -94,15 +127,6 @@ To get a local copy up and running, follow these steps.
 ### Prerequisites
 
 In order to run this project you need Ruby installed on your computer.
-
-
-<!--
-Example command:
-
-```sh
- gem install rails
-```
- -->
 
 ### Setup
 
