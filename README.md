@@ -54,7 +54,7 @@ Inventory should be passed into the application in a text file, with the item in
 
 I have created a plain CLI app so Jerry's employees can interact with the inventory previously loaded with the inventory.txt file.
 
-One of the first things that de app will ask is wheter the customer status is member or not, giving a quick solution for the first problematic.
+One of the first things that de app will ask is whether the customer status is a member or not, giving a quick solution for the first problem.
 
 After that the employee can choose between 6 options that are:
 
@@ -66,29 +66,29 @@ After that the employee can choose between 6 options that are:
 - Quit
 
 ### Shop:
-- In this section we can select an Item from the showed list using their index.
-- After that the app will asked how many items we need.
-- Finally our item with it's desired quantity will be added to the cart.
-- This section ends asking if we need to add a new Item or not.
+- In this section, we can select an Item from the shown list using their index.
+- After that, the app will ask how many items we need.
+- Finally, our item with its desired quantity will be added to the cart.
+- This section ends by asking if we need to add a new Item or not.
 
-### Remove from cart:
-- Here my app show 3 options:
-  - Remove item from cart: Here we select the item we desire to elimited individualy.
-  - Remove all items from cart: Here we just erase all items added to cart.
-  - Go back to main manu: in case you change your mind.
+### Remove from the cart:
+- Here my app shows 3 options:
+  - Remove item from the cart: Here we select the item we desire to eliminate individually.
+  - Remove all items from the cart: Here we just erase all items added to the cart.
+  - Go back to the main menu: in case you change your mind.
 
 ### View cart:
-- Here we print in our terminal a preview of our cart showing us the name of the item with it's selected quantity, unit price and total price.
-- We also can preview in detail what is the final amount that the customer needs to pay, showing subtotal, tax `(if it's taxable)` and the sum of those two as Total.
+- Here we print in our terminal a preview of our cart showing us the name of the item with its selected quantity, unit price, and total price.
+- We also can preview in detail what is the final amount that the customer needs to pay, showing subtotal, tax `(if it's taxable)` and the sum of those two as a Total.
 
 ### Checkout:
-- First the app will ask for the amount of money that the customer will use to pay.
-  - if it's not enough the app will print `not enough cash` and it'l ask again.
-- If we input the correct amount of cash the app will print us a receipt with the same information that the cart showed us but also with the amount of money that our members saved!, all of this appear in a new file named after it's number of transaction and date.
+- First, the app will ask for the amount of money that the customer will use to pay.
+  - if it's not enough the app will print `not enough cash` and it'll ask again.
+- If we input the correct amount of cash the app will print us a receipt with the same information that the cart showed us but also with the amount of money that our members saved! all of this appears in a new file named after its number of transactions and date.
 
 Optional future implementation options:
 - We can use `Thor` for our CLI for a better user experience.
-- we can edit our cart by decreasing or increasing the quantity of items.
+- we can edit our cart by decreasing or increasing the number of items.
 
 
 
