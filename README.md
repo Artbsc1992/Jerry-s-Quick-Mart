@@ -85,7 +85,7 @@ After that the employee can choose between 6 options that are:
   - if it's not enough the app will print `not enough cash` and it'll ask again.
 - If we input the correct amount of cash the app will print us a receipt with the same information that the cart showed us but also with the amount of money that our members saved! all of this appears in a new file named after its number of transactions and date.
 
-Optional future implementation options:
+Optional future implementation:
 - We can use `Thor` for our CLI for a better user experience.
 - we can edit our cart by decreasing or increasing the number of items.
 
