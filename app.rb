@@ -38,7 +38,7 @@ class App
     puts "Select an item"
 
     @inventory.items.each_with_index do |item, index|
-      puts "#{index + 1}. #{item.name}: stock: #{item.quantity}, $#{@member == 'y' ? item.member_price : item.regular_price}"
+      puts "#{index + 1}. #{item.name}: stock: #{item.quantity}, $#{@member == 'y' ? item.member_price : item.regular_price}" if item.quantity.to_i > 0 
     end
 
     index = gets.chomp.to_i
