@@ -154,14 +154,14 @@ class App
       return
     end
     @date = Date.today
-    puts "TOTAL: $#{total}"
+    puts "TOTAL: $#{format('%.2f',total)}"
     puts "CASH: $"
     cash = gets.chomp.to_f
     if cash < total
       puts "Not enough cash"
       checkout
     end
-    puts "CHANGE: $#{cash - total}"
+    puts "CHANGE: $#{format('%.2f', cash - total)}"
     recipe = File.new("transaction_#{format('%06d', @transaction_number)}_#{@date.strftime('%d%m%y')}.txt", 'w')
     recipe.puts @date.strftime('%B %d, %Y')
     recipe.puts "TRANSACTION: #{format('%06d', @transaction_number)}"
