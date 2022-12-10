@@ -55,10 +55,6 @@ describe App do
       expect(@app.shopping_cart.length).equal? 0
     end
 
-    # it 'should show the shopping cart' do
-    #   allow(@app).to receive(:gets).and_return("3")
-    #   expect { @app.view_cart }.to output("Your cart:\nItem #{' ' * 10} Quantity #{' ' * 10} Unit price #{' ' * 10} Total price\nMilk #{' ' * 10} 10 #{' ' * 20} $3.50 #{' ' * 15} $35.00\nTOTAL NUMBER OF ITEMS: 10.00\nSUB-TOTAL: $35.00\nTAX (6.5%): $0.00\nTOTAL: $35.00").to_stdout
-    # end
   end
 
   context 'when testing mathematical operations' do
@@ -97,12 +93,6 @@ describe App do
       @cart = Shopping_cart.new(@item1, 2, 3.50)
       @app.shopping_cart << @cart
     end
-
-    # it 'when select checkout should update the inventory' do
-    #   allow(@app).to receive(:gets).and_return("10")
-    #   @app.checkout
-    #   expect(@app.inventory.items[0].quantity).to eq @Milk.quantity - 2
-    # end
 
     it 'when select cancel transaction should return the shopping cart empty' do
       allow(@app).to receive(:gets).and_return("5")
