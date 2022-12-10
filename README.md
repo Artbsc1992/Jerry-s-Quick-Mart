@@ -50,6 +50,8 @@ Inventory should be passed into the application in a text file, with the item in
 
 ## Solution <a name="solution"></a>
 
+[Video explanation](https://www.loom.com/share/09f0c3700f244f55af054b304a9100cd)
+
 I have created a plain CLI app so Jerry's employees can interact with the inventory previously loaded with the inventory.txt file.
 
 One of the first things that de app will ask is wheter the customer status is member or not, giving a quick solution for the first problematic.
