@@ -53,44 +53,47 @@ class Shopping_cart
     end
   end
 
-  def total_items
-    total_items = 0
-    @@cart.map {|item| item.quantity.to_i}.sum
-  end
+  def self.show
 
-  def sub_total
-    sub_total = 0
-    @@cart.each do |item|
-      sub_total += (item.quantity.to_f * item.unit_price.to_f)
+    if @@cart.empty?
+      puts 'Your cart is empty'
+      return
     end
-    sub_total
-  end
-
-  def tax
-    tax = 0
-    @@cart.each do |item|
-      tax += (item.quantity.to_f * item.unit_price.to_f) * 0.065 if item.tax_status == 'Taxable'
-    end
-    tax
-  end
-
-  def total
-    sub_total + tax
-  end
-
-  def self.show(cart)
-
-    @cart = cart
 
     puts "Your cart:"
     puts "Item #{' ' * 10} Quantity #{' ' * 10} Unit price #{' ' * 10} Total price"
-    @cart.each do |item|
-      puts "#{item.name} #{' ' * 10} #{item.quantity} #{' ' * 20} $#{format('%.2f', item.unit_price)} #{' ' * 15} $#{format('%.2f', item.quantity * item.unit_price)}"
+    @@cart.each do |item|
+      puts "#{item[:name]} #{' ' * 10} #{item[:quantity]} #{' ' * 20} $#{format('%.2f', item[:unit_price])} #{' ' * 15} $#{format('%.2f', item[:quantity] * item[:unit_price])}"
     end
     puts "TOTAL NUMBER OF ITEMS: #{format('%.2f', total_items)}"
     puts "SUB-TOTAL: $#{format('%.2f', sub_total)}"
     puts "TAX (6.5%): $#{format('%.2f', tax)}"
     puts "TOTAL: $#{format('%.2f', total)}"
+  end
+
+  def self.total_items
+    total_items = 0
+    @@cart.map {|item| item[:quantity].to_i}.sum
+  end
+
+  def self.sub_total
+    sub_total = 0
+    @@cart.each do |item|
+      sub_total += (item[:quantity].to_f * item[:unit_price].to_f)
+    end
+    sub_total
+  end
+
+  def self.tax
+    tax = 0
+    @@cart.each do |item|
+      tax += (item[:quantity].to_f * item[:unit_price].to_f) * 0.065 if item[:tax_status] == 'Taxable'
+    end
+    tax
+  end
+
+  def self.total
+    sub_total + tax
   end
 
 end

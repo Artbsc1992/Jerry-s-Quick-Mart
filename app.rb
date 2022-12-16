@@ -82,11 +82,8 @@ class App
   end
 
   def view_cart
-    if @cart.empty?
-      puts 'Your cart is empty'
-      return
-    end
-    Shopping_cart.show(@cart)
+    
+    Shopping_cart.show
   end
 
   def checkout
