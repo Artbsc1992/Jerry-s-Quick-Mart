@@ -8,7 +8,7 @@ class App
 
   def initialize
     @inventory = Inventory.new
-    @cart = []
+    @cart = Shopping_cart.new
     @member = ''
     self.upload_inventory
     @transaction_number = transaction_number
@@ -63,7 +63,9 @@ class App
     end
 
     unit_price = @member == 'y' ? item.member_price : item.regular_price
-    @cart << Shopping_cart.new(item, item_qty, unit_price)
+
+    Shopping_cart.add_to_cart(item, item_qty, unit_price)
+
     puts "Item added to cart"
     puts "Would you like to add another item? (y/n)"
     response = gets.chomp
@@ -75,11 +77,7 @@ class App
 
   def remove_item_from_cart 
 
-    if @cart.empty?
-      puts 'Your cart is empty'
-      return
-    end
-    Shopping_cart.remove_item(@cart)
+    Shopping_cart.remove_item
 
   end
 
@@ -88,40 +86,7 @@ class App
       puts 'Your cart is empty'
       return
     end
-    puts "Your cart:"
-    puts "Item #{' ' * 10} Quantity #{' ' * 10} Unit price #{' ' * 10} Total price"
-    @cart.each do |item|
-      puts "#{item.name} #{' ' * 10} #{item.quantity} #{' ' * 20} $#{format('%.2f', item.unit_price)} #{' ' * 15} $#{format('%.2f', item.quantity * item.unit_price)}"
-    end
-    puts "TOTAL NUMBER OF ITEMS: #{format('%.2f', total_items)}"
-    puts "SUB-TOTAL: $#{format('%.2f', sub_total)}"
-    puts "TAX (6.5%): $#{format('%.2f', tax)}"
-    puts "TOTAL: $#{format('%.2f', total)}"
-  end
-
-  def total_items
-    total_items = 0
-    @cart.map {|item| item.quantity.to_i}.sum
-  end
-
-  def sub_total
-    sub_total = 0
-    @cart.each do |item|
-      sub_total += (item.quantity.to_f * item.unit_price.to_f)
-    end
-    sub_total
-  end
-
-  def tax
-    tax = 0
-    @cart.each do |item|
-      tax += (item.quantity.to_f * item.unit_price.to_f) * 0.065 if item.tax_status == 'Taxable'
-    end
-    tax
-  end
-
-  def total
-    sub_total + tax
+    Shopping_cart.show(@cart)
   end
 
   def checkout
