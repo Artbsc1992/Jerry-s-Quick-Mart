@@ -1,7 +1,6 @@
 require_relative 'classes/inventory'
 require_relative 'classes/shopping_cart'
 require_relative 'classes/item'
-require 'date'
 
 class App
   attr_accessor :inventory, :cart, :member, :transaction_number, :shopping_cart
@@ -13,7 +12,6 @@ class App
     self.upload_inventory
     @transaction_number = transaction_number
   end
-
 
   def upload_inventory
     # puts 'Write your inventory txt file name'
@@ -84,67 +82,16 @@ class App
   def view_cart
     
     Shopping_cart.show
+
   end
 
   def checkout
-    if @cart.empty?
-      puts 'Your cart is empty'
-      return
-    end
-    @date = Date.today
-    puts "TOTAL: $#{format('%.2f',total)}"
-    puts "CASH: $"
-    cash = gets.chomp.to_f
-    if cash < total
-      puts "Not enough cash"
-      checkout
-    end
-    puts "CHANGE: $#{format('%.2f', cash - total)}"
-    recipe = File.new("transaction_#{format('%06d', @transaction_number)}_#{@date.strftime('%d%m%y')}.txt", 'w')
-    recipe.puts @date.strftime('%B %d, %Y')
-    recipe.puts "TRANSACTION: #{format('%06d', @transaction_number)}"
-    recipe.puts "ITEM #{' ' * 10} QUANTITY #{' ' * 10} UNIT PRICE #{' ' * 10} TOTAL"
-    @cart.each do |item|
-      recipe.puts "#{item.name} #{' ' * 10} #{item.quantity} #{' ' * 20} $#{format('%.2f', item.unit_price)} #{' ' * 15} $#{format('%.2f', item.quantity * item.unit_price)}"
-    end
-    recipe.puts "#{'*' * 50}"
-    recipe.puts "TOTAL NUMBER OF ITEMS: #{total_items}"
-    recipe.puts "SUB-TOTAL: $#{format('%.2f',sub_total)}"
-    recipe.puts "TAX (6.5%): $#{format('%.2f', tax)}"
-    recipe.puts "TOTAL: $#{format('%.2f',total)}"
-    recipe.puts "CASH: $#{format('%.2f',cash)}"
-    recipe.puts "CHANGE: $#{format('%.2f', cash - total)}"
-    recipe.puts "#{'*' * 50}"
-    recipe.puts "YOU SAVED $#{format('%.2f', discount_amount)}!" if @member == 'y'
-    update_inventory
-    @cart = []
+
+    Shopping_cart.receipt(@transaction_number, @inventory, @member)
     update_transaction_number
-    recipe.close
 
   end
 
-  def discount_amount 
-    discount = 0
-    @cart.each do |item|
-      discount += (item.regular_price - item.unit_price) * item.quantity
-    end
-    discount
-  end
-
-  def update_inventory
-    @cart.each do |item|
-      @inventory.items.each do |inventory_item|
-        inventory_item.quantity = (inventory_item.quantity.to_i - item.quantity.to_i) if inventory_item.name == item.name
-      end
-    end
-    File.open('./data/inventory.txt', 'w') do |file|
-      @inventory.items.each do |item|
-        file.puts "#{item.name}: #{item.quantity}, $#{format('%.2f',
-                                                             item.regular_price)}, $#{format('%.2f',
-                                                                                            item.member_price)}, #{item.tax_status}"
-      end
-    end
-  end
 
   def update_transaction_number
     @transaction_number += 1
