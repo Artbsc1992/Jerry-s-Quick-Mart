@@ -1,3 +1,5 @@
+require_relative 'inventory'
+require 'date'
 
 class Shopping_cart
   attr_accessor :name, :tax_status, :unit_price, :regular_price, :item_qty, :item, :id, :quantity, :cart, :remove_item
@@ -95,5 +97,53 @@ class Shopping_cart
   def self.total
     sub_total + tax
   end
+
+  def self.receipt(transaction_number, inventory, member)
+    if @@cart.empty?
+      puts 'Your cart is empty'
+      return
+    end
+    @date = Date.today
+    puts "TOTAL: $#{format('%.2f',total)}"
+    puts "CASH: $"
+    cash = gets.chomp.to_f
+    if cash < total
+      puts "Not enough cash"
+      receipt
+    end
+    puts "CHANGE: $#{format('%.2f', cash - total)}"
+    recipe = File.new("transaction_#{format('%06d', transaction_number)}_#{@date.strftime('%d%m%y')}.txt", 'w')
+    recipe.puts @date.strftime('%B %d, %Y')
+    recipe.puts "TRANSACTION: #{format('%06d', transaction_number)}"
+    recipe.puts "ITEM #{' ' * 10} QUANTITY #{' ' * 10} UNIT PRICE #{' ' * 10} TOTAL"
+    @@cart.each do |item|
+      recipe.puts "#{item[:name]} #{' ' * 10} #{item[:quantity]} #{' ' * 20} $#{format('%.2f', item[:unit_price])} #{' ' * 15} $#{format('%.2f', item[:quantity] * item[:unit_price])}"
+    end
+    recipe.puts "#{'*' * 50}"
+    recipe.puts "TOTAL NUMBER OF ITEMS: #{total_items}"
+    recipe.puts "SUB-TOTAL: $#{format('%.2f',sub_total)}"
+    recipe.puts "TAX (6.5%): $#{format('%.2f', tax)}"
+    recipe.puts "TOTAL: $#{format('%.2f',total)}"
+    recipe.puts "CASH: $#{format('%.2f',cash)}"
+    recipe.puts "CHANGE: $#{format('%.2f', cash - total)}"
+    recipe.puts "#{'*' * 50}"
+    recipe.puts "YOU SAVED $#{format('%.2f', discount_amount)}!" if member == 'y'
+    
+    
+    recipe.close
+    
+    Inventory.update(@@cart, inventory)
+
+    @@cart = []
+  end
+
+  def self.discount_amount 
+    discount = 0
+    @@cart.each do |item|
+      discount += (item[:regular_price] - item[:unit_price]) * item[:quantity]
+    end
+    discount
+  end
+
 
 end
